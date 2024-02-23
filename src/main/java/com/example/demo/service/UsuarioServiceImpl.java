@@ -9,18 +9,20 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.IUsuarioRepository;
 import com.example.demo.repository.modelo.Usuario;
- import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyList;
 
 @Service
-public class UsuarioServiceImpl implements UserDetailsService {
+public class UsuarioServiceImpl implements UserDetailsService{
 
 	@Autowired
-	IUsuarioRepository usuarioRepository;
+	private IUsuarioRepository iUsuarioRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = this.usuarioRepository.consultarPoNombre(username);
+		Usuario usuario = this.iUsuarioRepository.consultarPorNombre(username);
+		System.out.println(usuario.getNombre());
+		System.out.println(usuario.getPassword());
 		return new User(usuario.getNombre(), usuario.getPassword(), emptyList());
 	}
-
+	
 }

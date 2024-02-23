@@ -1,10 +1,10 @@
 package com.example.demo.repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.modelo.Usuario;
@@ -13,15 +13,15 @@ import com.example.demo.repository.modelo.Usuario;
 @Repository
 public class UsuarioRepositoryImpl implements IUsuarioRepository {
 
-	@Autowired
+	@PersistenceContext
 	private EntityManager entityManager;
 
 	@Override
-	public Usuario consultarPoNombre(String nombre) {
-		TypedQuery<Usuario> query = this.entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nombre=:value",
+	public Usuario consultarPorNombre(String nombre) {
+		TypedQuery<Usuario> m = this.entityManager.createQuery("SELECT u FROM Usuario u WHERE u.nombre= :nombre",
 				Usuario.class);
-		query.setParameter("value", nombre);
-		return query.getSingleResult();
+		m.setParameter("nombre", nombre);
+		return m.getSingleResult();
 	}
 
 }
