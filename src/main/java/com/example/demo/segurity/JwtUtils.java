@@ -10,17 +10,19 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtUtils {
-	
+
 	@Value("${app.jwtSemilla}")
 	private String jwtSemilla;
-	
+
 	@Value("${app.jwtExpirationMs}")
 	private int jwtExpirationMs;
 
 	public String buildTokenJwt(String nombre) {
-		return Jwts.builder().setSubject(nombre).setSubject("Hola mundo").setIssuedAt(new Date())
+		return Jwts.builder().setSubject(nombre).setSubject(nombre).setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + this.jwtExpirationMs))
-				.signWith(SignatureAlgorithm.HS512, "gfdiofjoaisdjfioadjfioasdjfoiajdfioasjf1221221212aosidjf8af98adf8asdhusdhusdhauihdfudshfuiadhfaishfdaisuhfuiashfiuhdsffasdf").compact();
+				.signWith(SignatureAlgorithm.HS512,
+						"gfdiofjoaisdjfioadjfioasdjfoiajdfioasjf1221221212aosidjf8af98adf8asdhusdhusdhauihdfudshfuiadhfaishfdaisuhfuiashfiuhdsffasdf")
+				.compact();
 	}
 
 }
