@@ -18,11 +18,8 @@ public class JwtUtils {
 	private int jwtExpirationMs;
 
 	public String buildTokenJwt(String nombre) {
-		return Jwts.builder().setSubject(nombre).setSubject(nombre).setIssuedAt(new Date())
+		return Jwts.builder().setSubject(nombre).setSubject("Hola Mundo").setIssuedAt(new Date())
 				.setExpiration(new Date(System.currentTimeMillis() + this.jwtExpirationMs))
-				.signWith(SignatureAlgorithm.HS512,
-						"gfdiofjoaisdjfioadjfioasdjfoiajdfioasjf1221221212aosidjf8af98adf8asdhusdhusdhauihdfudshfuiadhfaishfdaisuhfuiashfiuhdsffasdf")
-				.compact();
+				.signWith(SignatureAlgorithm.HS512, this.jwtSemilla).compact();
 	}
-
 }
